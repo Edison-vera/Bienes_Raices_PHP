@@ -134,7 +134,7 @@ if(empty($errores)){
     if ($resultado){
     // echo"Insertado correctamente";
    //Redireccionar al usuario
-   header("location: ../"); 
+   header("location: ../?resultado=1"); 
 
 }
 
