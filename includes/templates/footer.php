@@ -14,7 +14,7 @@
 
 
         <!-- Agregar modernizer -->
-        <script src="../../../BienesRaices/build/js/bundle.min.js"></script>
+        <script src="http://localhost/BienesRaices/build/js/bundle.min.js"></script>
 </body>
 
 </html>

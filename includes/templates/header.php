@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bienes Raicies</title>
     <!-- Agregar hoja de estilos -->
-    <link rel="stylesheet" href="../../../BienesRaices/build/css/app.css">
+    <link rel="stylesheet" href="http://localhost/BienesRaices/build/css/app.css">
 
 </head>
 
@@ -18,13 +18,13 @@
             <div class="barra">
                 <a href="index.php">
     
-                     <img src="../../../BienesRaices/build/img/logo.png" alt="logotipo"> 
+                     <img src="http://localhost/BienesRaices/build/img/logo.png" alt="logotipo"> 
                 </a>
                 <div class="mobile-menu">
-                    <img src="../../../BienesRaices/build/img/barras.svg" alt="Logotipo de bienes raices">
+                    <img src="http://localhost/BienesRaices/build/img/barras.svg" alt="Logotipo de bienes raices">
                 </div>
                 <div class="derecha">
-                    <img class="dark-mode-boton" src="../../../BienesRaices/build/img/dark-mode.svg" alt="Dark Mode">
+                    <img class="dark-mode-boton" src="http://localhost/BienesRaices/build/img/dark-mode.svg" alt="Dark Mode">
                     <nav class="navegacion">
                         <a href="nosotros.php">Nosotros</a>
                         <a href="anuncios.php">Anuncios</a>
