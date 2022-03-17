@@ -4,6 +4,8 @@
 // var_dump($_GET);
 // echo "<pre>";
 
+
+//Validar que sea un ID valido 
 $id =$_GET["id"];
 $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -11,12 +13,20 @@ if(!$id){
     header("Location: ../");
 }
 
-var_dump($id);
+// var_dump($id);
 
 //Base datos 
 require "../../includes/config/database.php";
  $db= conectarDB();
 
+ // Obtener los datos de la propiedad 
+$consulta = "SELECT * FROM propiedades WHERE id = ${id}";
+$resultado = mysqli_query($db, $consulta);
+$propiedad = mysqli_fetch_assoc($resultado);
+
+// echo"<pre>";
+// var_dump($propiedad);
+// echo"<pre>";
 
 //Consultar para obtener los vendedores de la base de datos 
 $consulta = "SELECT * FROM vendedores";
@@ -31,13 +41,14 @@ $resultado = mysqli_query($db, $consulta);
 //Arreglo con mensajes de errores 
 $errores =[];
 
-$titulo = "";
-     $precio = "";
-     $descripcion = "";
-     $habitaciones = "";
-     $wc = "";
-     $estacionamiento = "";
-     $vendedorId = "";
+     $titulo = $propiedad["titulo"];
+     $precio = $propiedad["precio"];
+     $descripcion = $propiedad["descripcion"];
+     $habitaciones = $propiedad["habitaciones"];
+     $wc = $propiedad["wc"];
+     $estacionamiento = $propiedad["estacionamiento"];
+     $vendedorId = $propiedad["vendedorId"];
+     $imagenPropiedad = $propiedad["imagen"];
 
 
 
@@ -185,6 +196,7 @@ incluirTemplate("header");
 
 <label for="imagen">Imagen</label>
 <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen" >
+<img class="imagen-small" src="../../../BienesRaices/imagenes/<?php echo $imagenPropiedad; ?>" >
 
 <label for="descripcion">Descripción</label>
 <textarea name="descripcion" name="descripcion" > <?php echo $descripcion; ?></textarea>
