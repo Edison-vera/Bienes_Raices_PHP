@@ -55,10 +55,11 @@ $errores =[];
 //Ejecutar el codigo despues que el usuario envia el formulario 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    //   echo "<pre>";
-    //   var_dump($_POST);
-    //   echo "<pre>";
 
+    //    echo "<pre>";
+    //    var_dump($_POST);
+    //    echo "<pre>";
+// exit;
     //   echo "<pre>";
     //   var_dump($_FILES);
     //   echo "<pre>";
@@ -104,9 +105,7 @@ if(!$vendedorId){
     $errores[]= "Debes añadir el vendedor";
 }
 
-if (!$imagen["name"] || $imagen["error"] ){
-    $errores[] = "La imagen es obligatoria";
-}
+
 
 // Validar por tamaño (100 kb maximo)
 $medida = 1000 * 1000;
@@ -127,31 +126,32 @@ if ($imagen["size"] > $medida){
 
 if(empty($errores)){
 
-    /**Subida de archivos */
+//     /**Subida de archivos */
 
-    //Crear una carpeta
-    $carpetaImagenes ="../../imagenes/";
+//     //Crear una carpeta
+//     $carpetaImagenes ="../../imagenes/";
 
-    if (!is_dir($carpetaImagenes)){
-    mkdir($carpetaImagenes);
-    }
+//     if (!is_dir($carpetaImagenes)){
+//     mkdir($carpetaImagenes);
+//     }
 
-    //Generar un nombre unico
-    $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+//     //Generar un nombre unico
+//     $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
 
 
 
-   // Subir la imagen 
-    move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . $nombreImagen );
+//    // Subir la imagen 
+//     move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . $nombreImagen );
 
 
 
 //Insertar en la base de datos 
 
-   $query = "INSERT INTO propiedades(titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId ) 
-          VALUES('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId' )";
+   $query = "UPDATE propiedades SET titulo = '${titulo}', precio = ${precio}, descripcion = '${descripcion}', habitaciones = '${habitaciones}',
+             wc = ${wc}, estacionamiento = ${estacionamiento}, vendedorId = ${vendedorId} WHERE id= ${id} ";
 
-// echo $query;
+//    echo $query;
+
 
    $resultado = mysqli_query($db, $query);
 
@@ -159,7 +159,7 @@ if(empty($errores)){
     if ($resultado){
     // echo"Insertado correctamente";
    //Redireccionar al usuario
-   header("location: ../?resultado=1"); 
+   header("location: ../?resultado=2"); 
 
 }
 
@@ -184,7 +184,7 @@ incluirTemplate("header");
 
 
 
-<form class="formulario " method="POST" action="../propiedades/crear.php" enctype="multipart/form-data">
+<form class="formulario " method="POST"  enctype="multipart/form-data">
 <fieldset>
 <legend>Informacion General</legend>
 
