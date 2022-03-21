@@ -41,11 +41,11 @@
                         </li>
                     </ul>
 
-                    <a href="anuncios.php?id=<?php echo $propiedad["id"]; ?>" class="boton-amarillo-block">Ver Propiedad</a>
+                    <a href="anuncio.php?id=<?php echo $propiedad["id"]; ?>" class="boton-amarillo-block">Ver Propiedad</a>
                 </div>
                 <!--- Contenido anuncio -->
-              
             </div>
+            
             <!-- Anuncio -->
             <?php endwhile; ?>
         </div>
@@ -53,5 +53,5 @@
        
         <?php 
         //Cerrar la conexion
-  mysqli_close($db);
+        mysqli_close($db);
         ?>

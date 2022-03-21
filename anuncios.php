@@ -13,7 +13,7 @@ incluirTemplate("header");
             <h2>Casas y departamentos en venta</h2>
 
             <?php 
-        $limite =10;
+        $limite =4;
         include "includes/templates/anuncios.php";
         ?>
        
