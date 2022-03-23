@@ -173,7 +173,7 @@ incluirTemplate("header");
 <input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen" >
 
 <label for="descripcion">Descripción</label>
-<textarea name="descripcion" name="descripcion" > <?php echo $descripcion; ?></textarea>
+<textarea name="descripcion" name="descripcion"  > <?php echo $descripcion;  ?></textarea>
 
 </fieldset>
 

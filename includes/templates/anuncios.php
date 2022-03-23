@@ -12,12 +12,12 @@
 
 
 ?>
-<div class="contenedor-anuncios">
-            <?php while($propiedad = mysqli_fetch_assoc($resultado)):?>
 
+        <div class="contenedor-anuncios">
+            <?php while($propiedad = mysqli_fetch_assoc($resultado)):?>
             <div class="anuncio">
     
-                    <img loading="lazy" src="../../../BienesRaices/imagenes/<?php echo $propiedad["imagen"]; ?>" alt="anuncios">
+                <img loading="lazy" src="../../../BienesRaices/imagenes/<?php echo $propiedad["imagen"]; ?>" alt="anuncios">
                 
                 <div class="contenido-anuncio">
                     <h3><?php echo $propiedad["titulo"]; ?> </h3>
@@ -45,9 +45,9 @@
                 </div>
                 <!--- Contenido anuncio -->
             </div>
-            
-            <!-- Anuncio -->
             <?php endwhile; ?>
+            <!-- Anuncio -->
+            
         </div>
         <!-- Contenedor-Anuncios -->
        

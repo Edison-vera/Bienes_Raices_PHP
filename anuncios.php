@@ -8,14 +8,14 @@ incluirTemplate("header");
 ?>
 
 
-    <main class="contenedor seccion">
+    <main class="contenedor seccion ">
         
             <h2>Casas y departamentos en venta</h2>
 
-            <?php 
-        $limite =4;
+    <?php 
+        $limite =6;
         include "includes/templates/anuncios.php";
-        ?>
+    ?>
        
     </main>
 

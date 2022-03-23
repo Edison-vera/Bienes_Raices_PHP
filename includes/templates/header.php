@@ -16,7 +16,7 @@
     <header class="header <?php echo $inicio ?"inicio": ""; ?> ">
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="index.php">
+                <a href="/BienesRaices/index.php">
     
                      <img src="http://localhost/BienesRaices/build/img/logo.png" alt="logotipo"> 
                 </a>
@@ -26,10 +26,10 @@
                 <div class="derecha">
                     <img class="dark-mode-boton" src="http://localhost/BienesRaices/build/img/dark-mode.svg" alt="Dark Mode">
                     <nav class="navegacion">
-                        <a href="nosotros.php">Nosotros</a>
-                        <a href="anuncios.php">Anuncios</a>
-                        <a href="blog.php">Blog</a>
-                        <a href="contacto.php">Contacto</a>
+                        <a href="/BienesRaices/nosotros.php">Nosotros</a>
+                        <a href="/BienesRaices/anuncios.php">Anuncios</a>
+                        <a href="/BienesRaices/blog.php">Blog</a>
+                        <a href="/BienesRaices/contacto.php">Contacto</a>
                     </nav>
                 </div>
             </div>
