@@ -9,9 +9,9 @@ $errores = [];
 
 
 if($_SERVER["REQUEST_METHOD"] === "POST"){
-    echo"<pre>";
-    var_dump($_POST);
-    echo"</pre>";
+    // echo"<pre>";
+    // var_dump($_POST);
+    // echo"</pre>";
     
     $email = mysqli_real_escape_string($db, filter_var( $_POST['email'], FILTER_VALIDATE_EMAIL));
     
@@ -23,6 +23,22 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
     if(!$password){
         $errores[]= "El password es obligatorio";
     }
+    if(empty($errores)){
+
+     //Revisar si el usuario existe
+        $query = "SELECT * FROM usuarios WHERE email = '${email}' ";
+        $resultado = mysqli_query($db, $query);
+        var_dump($resultado);
+     
+        if ($resultado->num_rows){
+
+        }else
+         $errores [] = "El usuario no existe";
+    
+    
+    }
+
+
     // echo"<pre>";
     // var_dump($errores);
     // echo"</pre>";
