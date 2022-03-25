@@ -1,5 +1,12 @@
 <?php 
 
+require "../../includes/funciones.php";
+$auth = estaAutenticado();
+
+if(!$auth){
+    header("location: /BienesRaices");
+}
+
 // echo"<pre>";
 // var_dump($_GET);
 // echo "<pre>";
@@ -182,7 +189,7 @@ if(empty($errores)){
 
 
 }
-require "../../includes/funciones.php";
+
 incluirTemplate("header");
 
 ?>

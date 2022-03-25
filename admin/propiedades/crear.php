@@ -2,7 +2,13 @@
 //Base datos 
 require "../../includes/config/database.php";
  $db= conectarDB();
-
+require "../../includes/funciones.php";
+ $auth = estaAutenticado();
+ 
+ if(!$auth){
+     header("location: /BienesRaices");
+ }
+ 
 
 //Consultar para obtener los vendedores de la base de datos 
 $consulta = "SELECT * FROM vendedores";
@@ -142,7 +148,7 @@ if(empty($errores)){
 
 
 }
-require "../../includes/funciones.php";
+
 incluirTemplate("header");
 
 ?>
