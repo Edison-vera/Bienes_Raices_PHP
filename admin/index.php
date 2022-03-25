@@ -1,9 +1,16 @@
 <?php 
 
-// echo "<pre>";
-// var_dump($_POST);
-// echo "<pre>";
+ session_start();
 
+
+//  echo "<pre>";
+//  var_dump($_SESSION);
+//  echo "<pre>";
+
+$auth = $_SESSION["login"];
+ if(!$auth){
+     header("location: /BienesRaices");
+ }
 
 
 //Importar la conexion

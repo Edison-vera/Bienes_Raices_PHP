@@ -41,7 +41,15 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
 
             if($auth){
                 //El usuario esta autenticado 
+                session_start();
 
+                // Llenar el arreglo de la sesion
+                $_SESSION["usuario"] = $usuario["email"];
+                $_SESSION["login"] = true;
+
+                //    echo"<pre>";
+                //    var_dump($_SESSION);
+                //    echo"</pre>";
 
             }
             else{
