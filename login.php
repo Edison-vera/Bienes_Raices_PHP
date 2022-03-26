@@ -47,6 +47,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 $_SESSION["usuario"] = $usuario["email"];
                 $_SESSION["login"] = true;
 
+
+                header("location: /BienesRaices/admin");
                 //    echo"<pre>";
                 //    var_dump($_SESSION);
                 //    echo"</pre>";
