@@ -8,9 +8,7 @@ var_dump($id);
  if (!$id){
      header("location: ../BienesRaices");
     }
-
-     //Importar la conexion
-     require "../BienesRaices/includes/config/database.php";
+    require "includes/app.php";
      $db = conectarDB();
      
      //Consultar
@@ -25,12 +23,6 @@ var_dump($id);
 
      $propiedad = mysqli_fetch_assoc($resultado);
 
-
-
-
-
-
-require "includes/funciones.php";
 
 
 incluirTemplate("header");
