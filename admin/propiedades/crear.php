@@ -1,14 +1,19 @@
 <?php 
-require "../../includes/funciones.php";
-$auth = estaAutenticado();
+require "../../includes/app.php";
 
+use App\Propiedad;
+$propiedad = new Propiedad;
+echo "<pre>";
+var_dump($propiedad);
+echo "</pre>";
+exit;
+
+$auth = estaAutenticado();
 if(!$auth){
     header("location: /BienesRaices");
 }
 
 
-//Base datos 
-require "../../includes/config/database.php";
  $db= conectarDB();
 
 
