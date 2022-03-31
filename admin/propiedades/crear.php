@@ -2,19 +2,12 @@
 require "../../includes/app.php";
 
 use App\Propiedad;
-$propiedad = new Propiedad;
-echo "<pre>";
-var_dump($propiedad);
-echo "</pre>";
-exit;
 
-$auth = estaAutenticado();
-if(!$auth){
-    header("location: /BienesRaices");
-}
+estaAutenticado();
 
 
- $db= conectarDB();
+
+ conectarDB();
 
 
 //Consultar para obtener los vendedores de la base de datos 
