@@ -5,9 +5,7 @@ use App\Propiedad;
 
 estaAutenticado();
 
-
-
- conectarDB();
+ $db= conectarDB();
 
 
 //Consultar para obtener los vendedores de la base de datos 
@@ -35,6 +33,11 @@ $titulo = "";
 
 //Ejecutar el codigo despues que el usuario envia el formulario 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+
+    $propiedad = new Propiedad($_POST);
+    $propiedad->guardar();
+    debugear($propiedad);
+   
 
     //   echo "<pre>";
     //   var_dump($_POST);
@@ -200,7 +203,7 @@ incluirTemplate("header");
 
 <fieldset>
 <legend>Vendedor</legend>
-<select  name="vendedor" >
+<select  name="vendedorId" >
     <option value="">--Seleccione --</option>
     <?php while($vendedor = mysqli_fetch_assoc($resultado)): ?>
 <option <?php echo $vendedorId === $vendedor["id"] ? "selected": ""; ?>   value="<?php echo $vendedor["id"]; ?>"> <?php echo $vendedor  ["nombre"] . " " . $vendedor["apellido"]; ?></option>
