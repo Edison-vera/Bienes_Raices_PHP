@@ -3,9 +3,10 @@ require "../../includes/app.php";
 
 use App\Propiedad;
 
+
 estaAutenticado();
 
- $db= conectarDB();
+$db= conectarDB();
 
 
 //Consultar para obtener los vendedores de la base de datos 
@@ -21,7 +22,7 @@ $resultado = mysqli_query($db, $consulta);
 //Arreglo con mensajes de errores 
 $errores =[];
 
-$titulo = "";
+     $titulo = "";
      $precio = "";
      $descripcion = "";
      $habitaciones = "";
@@ -36,12 +37,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $propiedad = new Propiedad($_POST);
     $propiedad->guardar();
-    debugear($propiedad);
+
+
+    
    
 
-    //   echo "<pre>";
-    //   var_dump($_POST);
-    //   echo "<pre>";
+    //    echo "<pre>";
+    //    var_dump($_POST);
+    //    echo "<pre>";
 
     //   echo "<pre>";
     //   var_dump($_FILES);
