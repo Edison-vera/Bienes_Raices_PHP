@@ -133,10 +133,6 @@ if(empty($errores)){
 
 
 
-//Insertar en la base de datos 
-
-   $query = "INSERT INTO propiedades(titulo, precio, imagen, descripcion, habitaciones, wc, estacionamiento, creado, vendedorId ) 
-          VALUES('$titulo','$precio','$nombreImagen','$descripcion','$habitaciones', '$wc', '$estacionamiento', '$creado', '$vendedorId' )";
 
 // echo $query;
 
