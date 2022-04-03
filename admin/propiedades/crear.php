@@ -20,7 +20,8 @@ $resultado = mysqli_query($db, $consulta);
 
 
 //Arreglo con mensajes de errores 
-$errores =[];
+$errores = Propiedad::getErrores();
+
 
      $titulo = "";
      $precio = "";
@@ -36,83 +37,17 @@ $errores =[];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     $propiedad = new Propiedad($_POST);
-    $propiedad->guardar();
-
-
+    $errores= $propiedad->validar();
     
-   
-
-    //    echo "<pre>";
-    //    var_dump($_POST);
-    //    echo "<pre>";
-
-    //   echo "<pre>";
-    //   var_dump($_FILES);
-    //   echo "<pre>";
-
-    
-
-     $titulo =mysqli_real_escape_string( $db, $_POST["titulo"]);
-     $precio =mysqli_real_escape_string( $db, $_POST["precio"]);
-     $descripcion =mysqli_real_escape_string( $db, $_POST["descripcion"]);
-     $habitaciones =mysqli_real_escape_string( $db, $_POST["habitaciones"]);
-     $wc =mysqli_real_escape_string( $db, $_POST["wc"]);
-     $estacionamiento =mysqli_real_escape_string( $db, $_POST["estacionamiento"]);
-     $vendedorId =mysqli_real_escape_string( $db, $_POST["vendedor"]);
-     $creado = date("y/m/d");
-
-
-// Asignar files hacia una variable      
-$imagen = $_FILES["imagen"];
-
-
-if(!$titulo){
-    $errores[]= "Debes añadir un titulo";
-}
-
-if(!$precio){
-    $errores[]= "Debes añadir un precio";
-}
-
-if(strlen( $descripcion) < 50){
-    $errores[]= "Debes añadir una descripcion y debe tener al menos 50 caracteres";
-}
-
-if(!$habitaciones){
-    $errores[]= "Debes añadir el numero de habitaciones";
-}
-if(!$wc){
-    $errores[]= "Debes añadir el numero de baños";
-}
-if(!$estacionamiento){
-    $errores[]= "Debes añadir el numero de estacionamientos";
-}
-if(!$vendedorId){
-    $errores[]= "Debes añadir el vendedor";
-}
-
-if (!$imagen["name"] || $imagen["error"] ){
-    $errores[] = "La imagen es obligatoria";
-}
-
-// Validar por tamaño (100 kb maximo)
-$medida = 1000 * 1000;
-
-if ($imagen["size"] > $medida){
-    $errores [] = "La imagen es muy pesada";
-}
-
-
-
-  
-// echo "<pre>";  
-// var_dump($errores);
-// echo "<pre>";
-// exit;
 
 //Revisar que el arreglo de errores este vacio
 
 if(empty($errores)){
+    
+    $propiedad->guardar();
+    // Asignar files hacia una variable 
+    $imagen = $_FILES["imagen"];
+
 
     /**Subida de archivos */
 
