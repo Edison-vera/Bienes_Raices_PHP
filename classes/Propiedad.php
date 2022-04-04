@@ -35,7 +35,7 @@ class Propiedad {
         $this->id= $args["id"] ?? "";
         $this->titulo= $args["titulo"] ?? "";
         $this->precio= $args["precio"] ?? "";
-        $this->imagen= $args["imagen"] ?? "imagen.jpg";
+        $this->imagen= $args["imagen"] ?? "";
         $this->descripcion= $args["descripcion"] ?? "";
         $this->habitaciones= $args["habitaciones"] ?? "";
         $this->wc= $args["wc"] ?? "";
@@ -59,7 +59,8 @@ class Propiedad {
          
      
         $resultado = self::$db->query($query);
-        debugear($resultado);
+
+        return($resultado);
     }
 
 
@@ -84,6 +85,14 @@ class Propiedad {
         }
         return $sanitizado;
         
+    }
+
+    //Subida de archivos 
+    public function setImagen($imagen){
+        //Asignar al atributo el nombre de la imagen
+        if ($imagen)
+            $this->imagen = $imagen;
+
     }
      
     //Validacion de datos 
@@ -117,16 +126,11 @@ class Propiedad {
              self::$errores[]= "Debes añadir el vendedor";
          }
         
-        // if (!$this->imagen["name"] || $this->imagen["error"] ){
-        //     self::$errores[] = "La imagen es obligatoria";
-        // }
+         if (!$this->imagen){
+             self::$errores[] = "La imagen es obligatoria";
+         }
         
-        // // Validar por tamaño (100 kb maximo)
-        // $medida = 1000 * 1000;
-        
-        // if ($this->imagen["size"] > $this->medida){
-        //     self::$errores [] = "La imagen es muy pesada";
-        // }
+       
 
         return self::$errores;
     }

@@ -2,6 +2,7 @@
 require "../../includes/app.php";
 
 use App\Propiedad;
+use Intervention\Image\ImageManagerStatic as Image;
 
 
 estaAutenticado();
@@ -35,49 +36,48 @@ $errores = Propiedad::getErrores();
 
 //Ejecutar el codigo despues que el usuario envia el formulario 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-
+    //Crea una nueva instancia
     $propiedad = new Propiedad($_POST);
-    $errores= $propiedad->validar();
-    
-
-//Revisar que el arreglo de errores este vacio
-
-if(empty($errores)){
-    
-    $propiedad->guardar();
-    // Asignar files hacia una variable 
-    $imagen = $_FILES["imagen"];
-
 
     /**Subida de archivos */
-
-    //Crear una carpeta
-    $carpetaImagenes ="../../imagenes/";
-
-    if (!is_dir($carpetaImagenes)){
-    mkdir($carpetaImagenes);
-    }
+  
 
     //Generar un nombre unico
     $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+    
+    //Setear la imagen
+    //Realiz un resize a la imagen con intervetion
+    if($_FILES["imagen"]["tmp_name"]){
+     $image = Image::make($_FILES["imagen"]["tmp_name"])->fit(800,600);
+     $propiedad->setImagen($nombreImagen);
+    }
+
+    //Validar
+    $errores= $propiedad->validar();
+    
+
+    if(empty($errores)){
+    
 
 
+      //Crear una carpeta
+      $carpetaImagenes ="../../imagenes/";
 
-   // Subir la imagen 
-    move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . $nombreImagen );
+      if (!is_dir(CARPETA_IMAGENES)){
+          mkdir(CARPETA_IMAGENES);
+        }
 
+    //Guarda la imagen en el servidor
+    $image->save(CARPETA_IMAGENES . $nombreImagen);
+    
+    //Guarda en la base de datos
+    $resultado= $propiedad->guardar();
 
-
-
-// echo $query;
-
-   $resultado = mysqli_query($db, $query);
-
-
+    //Mensaje de exito o errores
     if ($resultado){
-    // echo"Insertado correctamente";
-   //Redireccionar al usuario
-   header("location: ../?resultado=1"); 
+     // echo"Insertado correctamente";
+     //Redireccionar al usuario
+     header("location: ../?resultado=1"); 
 
 }
 
