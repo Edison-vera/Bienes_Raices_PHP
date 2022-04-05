@@ -135,4 +135,43 @@ class Propiedad {
         return self::$errores;
     }
 
+    //Lista todas las propiedades
+    public static function all(){
+        $query = "SELECT * FROM propiedades";
+        $resultado= self::consultarSql($query);
+
+        return $resultado;
+        
+    }
+
+    public static function consultarSql($query){
+    //Consultar la base de datos
+    $resultado = self::$db->query($query);
+
+    //Iterar los resultados
+    $array =[];
+    while($registro = $resultado->fetch_assoc()){
+        $array[] = self::crearObjeto($registro);
+
+    }
+    
+    //Liberar memoria
+    $resultado->free();
+
+    //Retornar los resultados
+    return $array;
+
+    }
+
+    protected static function crearObjeto($registro){
+    $objeto = new self;
+
+    foreach($registro as $key => $value){
+        
+        if(property_exists($objeto, $key)){
+            $objeto->$key = $value;
+        }
+    }
+    return $objeto;
+    }
 }
