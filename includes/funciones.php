@@ -29,11 +29,13 @@ function debugear($variable){
     exit;
 }
 
+//Escapa el HTML
+function s($html): string {
+   $s = htmlspecialchars($html);
+   return $s;
+}
 
 
-    //  echo "<pre>";
-    //  var_dump($_SESSION);
-    //  echo "<pre>";
-    
+
    
      
