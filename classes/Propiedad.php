@@ -63,9 +63,6 @@ class Propiedad {
         return($resultado);
     }
 
-
-
-    
     //Identificar y unir los atributos de la BD
     public function atributos(){
         $atributos=[];
@@ -135,7 +132,7 @@ class Propiedad {
         return self::$errores;
     }
 
-    //Lista todas las propiedades
+    //Lista todos los registros de la base de datos
     public static function all(){
         $query = "SELECT * FROM propiedades";
         $resultado= self::consultarSql($query);
@@ -143,6 +140,14 @@ class Propiedad {
         return $resultado;
         
     }
+    
+    //Buscar un registro por su id en la base de datos 
+    public static function find($id){
+        $query = "SELECT * FROM propiedades WHERE id = ${id}";
+
+        $resultado = self::consultarSql($query);
+        return array_shift($resultado);
+    }   
 
     public static function consultarSql($query){
     //Consultar la base de datos

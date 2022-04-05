@@ -1,16 +1,9 @@
-<?php 
+<?php
 
-require "../../includes/funciones.php";
-$auth = estaAutenticado();
+use App\Propiedad;
 
-if(!$auth){
-    header("location: /BienesRaices");
-}
-
-// echo"<pre>";
-// var_dump($_GET);
-// echo "<pre>";
-
+require "../../includes/app.php";
+estaAutenticado();
 
 //Validar que sea un ID valido 
 $id =$_GET["id"];
@@ -20,42 +13,18 @@ if(!$id){
     header("Location: ../");
 }
 
-// var_dump($id);
-
-//Base datos 
-require "../../includes/config/database.php";
- $db= conectarDB();
 
  // Obtener los datos de la propiedad 
-$consulta = "SELECT * FROM propiedades WHERE id = ${id}";
-$resultado = mysqli_query($db, $consulta);
-$propiedad = mysqli_fetch_assoc($resultado);
 
-// echo"<pre>";
-// var_dump($propiedad);
-// echo"<pre>";
+ $propiedad = Propiedad::find($id);
 
 //Consultar para obtener los vendedores de la base de datos 
 $consulta = "SELECT * FROM vendedores";
 $resultado = mysqli_query($db, $consulta);
 
-// echo "<pre>";
-// var_dump($_SERVER);
-// echo "<pre>";
-
-
 
 //Arreglo con mensajes de errores 
 $errores =[];
-
-     $titulo = $propiedad["titulo"];
-     $precio = $propiedad["precio"];
-     $descripcion = $propiedad["descripcion"];
-     $habitaciones = $propiedad["habitaciones"];
-     $wc = $propiedad["wc"];
-     $estacionamiento = $propiedad["estacionamiento"];
-     $vendedorId = $propiedad["vendedorId"];
-     $imagenPropiedad = $propiedad["imagen"];
 
 
 
@@ -63,13 +32,7 @@ $errores =[];
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 
-    //    echo "<pre>";
-    //    var_dump($_POST);
-    //    echo "<pre>";
-// exit;
-    //   echo "<pre>";
-    //   var_dump($_FILES);
-    //   echo "<pre>";
+
 
     
 
@@ -121,13 +84,6 @@ if ($imagen["size"] > $medida){
     $errores [] = "La imagen es muy pesada";
 }
 
-
-
-  
-// echo "<pre>";  
-// var_dump($errores);
-// echo "<pre>";
-// exit;
 
 //Revisar que el arreglo de errores este vacio
 
@@ -207,51 +163,8 @@ incluirTemplate("header");
 
 
 <form class="formulario " method="POST"  enctype="multipart/form-data">
-<fieldset>
-<legend>Informacion General</legend>
 
-<label for="titulo">Titulo</label>
-<input type="text" id="titulo" name="titulo" placeholder="Titulo Propiedad" value="<?php echo $titulo; ?>">
-
-<label for="precio">Precio</label>
-<input type="number" id="precio" name="precio" placeholder="Precio de la Propiedad" value="<?php echo $precio; ?>">
-
-<label for="imagen">Imagen</label>
-<input type="file" id="imagen" accept="image/jpeg, image/png" name="imagen" >
-<img class="imagen-small" src="../../../BienesRaices/imagenes/<?php echo $imagenPropiedad; ?>" >
-
-<label for="descripcion">Descripción</label>
-<textarea name="descripcion" name="descripcion" > <?php echo $descripcion; ?></textarea>
-
-</fieldset>
-
-
-<fieldset>
-<legend>Información de la propiedad </legend>
-
-<label for="habitaciones">Habitaciones</label>
-<input type="number" id="habitaciones" name="habitaciones" placeholder="Numero de habitaciones" min="1" max="9" value="<?php echo $habitaciones; ?>">
-
-<label for="wc">Baños</label>
-<input type="number" id="wc" name="wc" placeholder="Numero de baños" min="1" max="9" value="<?php echo $wc; ?>">
-
-<label for="estacionamiento">Estacionamiento</label>
-<input type="number" id="estacionamiento" name="estacionamiento" placeholder="Numero de estacionamientos" min="1" max="9" value="<?php echo $estacionamiento; ?>">
-
-</fieldset>
-
-<fieldset>
-<legend>Vendedor</legend>
-<select  name="vendedor" >
-    <option value="">--Seleccione --</option>
-    <?php while($vendedor = mysqli_fetch_assoc($resultado)): ?>
-<option <?php echo $vendedorId === $vendedor["id"] ? "selected": ""; ?>   value="<?php echo $vendedor["id"]; ?>"> <?php echo $vendedor  ["nombre"] . " " . $vendedor["apellido"]; ?></option>
-
-    <?php endwhile; ?>    
-</select>
-
-
-</fieldset>
+<?php include "../../includes/templates/formulario_propiedades.php";?>
 
 <input type="submit" value="Actualizar Propiedad" class="boton boton-verde">
 
