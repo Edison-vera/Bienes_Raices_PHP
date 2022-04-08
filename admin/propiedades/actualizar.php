@@ -1,6 +1,7 @@
 <?php
 
 use App\Propiedad;
+use Intervention\Image\ImageManagerStatic as Image;
 
 require "../../includes/app.php";
 estaAutenticado();
@@ -39,47 +40,27 @@ $args =$_POST["propiedad"];
 
 $propiedad->sincronizar($args);
 
-
+//Validacion de errores 
 $errores = $propiedad->validar();
 
-//Revisar que el arreglo de errores este vacio
+//Subida de archivos
+   //Generar un nombre unico
+   $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
+
+   //Realiz un resize a la imagen con intervetion
+   if($_FILES["propiedad"]["tmp_name"]["imagen"]){
+    $image = Image::make($_FILES["propiedad"]["tmp_name"]["imagen"])->fit(800,600);
+    $propiedad->setImagen($nombreImagen);
+   }
+
+   debugear($propiedad);
 
 if(empty($errores)){
 
-//     /**Subida de archivos */
-
-//     //Crear una carpeta
-      $carpetaImagenes ="../../imagenes/";
-
-     if (!is_dir($carpetaImagenes)){
-     mkdir($carpetaImagenes);
-     }
-     
-    $nombreImagen = "";
-
-    
-
-      if($imagen["name"]){
-
-    //Eliminar imagen previa
-          unlink($carpetaImagenes . $propiedad["imagen"]);
-
-    //Generar un nombre unico
-       $nombreImagen = md5(uniqid(rand(), true)) . ".jpg";
-
-
-    // Subir la imagen 
-          move_uploaded_file($imagen["tmp_name"], $carpetaImagenes . $nombreImagen );
-      } else {
-          $nombreImagen = $propiedad["imagen"];
-      }
 
 
 
-   
-
-
-
+    exit;
 //Insertar en la base de datos 
 
    $query = "UPDATE propiedades SET titulo = '${titulo}', precio = ${precio}, imagen ='${nombreImagen}', descripcion = '${descripcion}', habitaciones = '${habitaciones}',
