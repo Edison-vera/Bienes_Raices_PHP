@@ -24,7 +24,7 @@ $resultado = mysqli_query($db, $consulta);
 
 
 //Arreglo con mensajes de errores 
-$errores =[];
+$errores = Propiedad::getErrores();
 
 
 
@@ -38,46 +38,9 @@ $args =$_POST["propiedad"];
 
 
 $propiedad->sincronizar($args);
-debugear($propiedad);
-
-// Asignar files hacia una variable      
-$imagen = $_FILES["imagen"];
 
 
-if(!$titulo){
-    $errores[]= "Debes añadir un titulo";
-}
-
-if(!$precio){
-    $errores[]= "Debes añadir un precio";
-}
-
-if(strlen( $descripcion) < 50){
-    $errores[]= "Debes añadir una descripcion y debe tener al menos 50 caracteres";
-}
-
-if(!$habitaciones){
-    $errores[]= "Debes añadir el numero de habitaciones";
-}
-if(!$wc){
-    $errores[]= "Debes añadir el numero de baños";
-}
-if(!$estacionamiento){
-    $errores[]= "Debes añadir el numero de estacionamientos";
-}
-if(!$vendedorId){
-    $errores[]= "Debes añadir el vendedor";
-}
-
-
-
-// Validar por tamaño (100 kb maximo)
-$medida = 1000 * 1000;
-
-if ($imagen["size"] > $medida){
-    $errores [] = "La imagen es muy pesada";
-}
-
+$errores = $propiedad->validar();
 
 //Revisar que el arreglo de errores este vacio
 
