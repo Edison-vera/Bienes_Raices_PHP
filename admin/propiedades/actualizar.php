@@ -53,34 +53,13 @@ $errores = $propiedad->validar();
     $propiedad->setImagen($nombreImagen);
    }
 
-   debugear($propiedad);
+
 
 if(empty($errores)){
-
-
-
-
-    exit;
-//Insertar en la base de datos 
-
-   $query = "UPDATE propiedades SET titulo = '${titulo}', precio = ${precio}, imagen ='${nombreImagen}', descripcion = '${descripcion}', habitaciones = '${habitaciones}',
-             wc = ${wc}, estacionamiento = ${estacionamiento}, vendedorId = ${vendedorId} WHERE id= ${id} ";
-
-//    echo $query;
-
-
-   $resultado = mysqli_query($db, $query);
-
-
-    if ($resultado){
-    // echo"Insertado correctamente";
-   //Redireccionar al usuario
-   header("location: ../?resultado=2"); 
-
+    //Almacenar la imagen
+    $image->save(CARPETA_IMAGENES .$nombreImagen);
+    $propiedad->guardar();
 }
-
-}
-
 
 }
 
