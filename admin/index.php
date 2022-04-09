@@ -17,18 +17,26 @@ $resultado =$_GET["resultado"] ?? null;
 
 //Eliminar de la base de datos un registro
 if($_SERVER["REQUEST_METHOD"] === "POST"){
+    
     $id = $_POST["id"];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
     if($id){
+        
+        $tipo = $_POST['tipo'];
 
-        $propiedad = Propiedad::find($id);
-        $propiedad->eliminar();
-
+        if(validarTipoContenido($tipo)){
         
-      
-        
-        
+            //Compara lo que vamos a eliminar
+            if($tipo === 'vendedor'){
+                $vendedor = Vendedor::find($id);
+                $vendedor->eliminar();
+            }else if ($tipo ==='propiedad'){
+                $propiedad = Propiedad::find($id);
+                $propiedad->eliminar();
+            }
+        }
+                 
     }
 
 }
@@ -74,6 +82,7 @@ incluirTemplate("header");
                            <form method="POST" class="w-100">
 
                                 <input type="hidden" name="id" value="<?php echo $propiedad->id;?>">
+                                <input type="hidden" name="tipo" value="propiedad">
 
 
                                 <input type="submit"  class="boton-rojo-block" value="Eliminar">
@@ -110,6 +119,7 @@ incluirTemplate("header");
                            <form method="POST" class="w-100">
 
                                 <input type="hidden" name="id" value="<?php echo $vendedor->id;?>">
+                                <input type="hidden" name="tipo" value="vendedor">
 
 
                                 <input type="submit"  class="boton-rojo-block" value="Eliminar">
