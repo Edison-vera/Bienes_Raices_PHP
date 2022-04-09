@@ -15,12 +15,6 @@ $propiedad = new Propiedad;
 $consulta = "SELECT * FROM vendedores";
 $resultado = mysqli_query($db, $consulta);
 
-// echo "<pre>";
-// var_dump($_SERVER);
-// echo "<pre>";
-
-
-
 //Arreglo con mensajes de errores 
 $errores = Propiedad::getErrores();
 
