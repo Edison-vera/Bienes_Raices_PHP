@@ -63,15 +63,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $image->save(CARPETA_IMAGENES . $nombreImagen);
     
     //Guarda en la base de datos
-    $resultado= $propiedad->guardar();
+    $propiedad->guardar();
 
-    //Mensaje de exito o errores
-    if ($resultado){
-     // echo"Insertado correctamente";
-     //Redireccionar al usuario
-     header("location: ../?resultado=1"); 
-
-}
+  
 
 }
 
