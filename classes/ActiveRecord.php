@@ -144,42 +144,14 @@ class ActiveRecord{
       
      //Validacion de datos 
      public static function getErrores(){
-         return self::$errores;
+         
+         return static::$errores;
      }
      
      public function validar(){
-         if(!$this->titulo){
-             self::$errores[]= "Debes añadir un titulo";
-         }
-         
-          if(!$this->precio){
-              self::$errores[]= "Debes añadir un precio";
-          }
-         
-          if(strlen($this->descripcion) < 50){
-              self::$errores[]= "Debes añadir una descripcion y debe tener al menos 50 caracteres";
-          }
-         
-          if(!$this->habitaciones){
-              self::$errores[]= "Debes añadir el numero de habitaciones";
-          }
-          if(!$this->wc){
-              self::$errores[]= "Debes añadir el numero de baños";
-          }
-          if(!$this->estacionamiento){
-              self::$errores[]= "Debes añadir el numero de estacionamientos";
-          }
-          if(!$this->vendedorId){
-              self::$errores[]= "Debes añadir el vendedor";
-          }
-         
-          if (!$this->imagen){
-              self::$errores[] = "La imagen es obligatoria";
-          }
-         
         
- 
-         return self::$errores;
+        static::$errores=[];
+         return static::$errores;
      }
  
      //Lista todos los registros de la base de datos
