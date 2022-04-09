@@ -51,6 +51,7 @@ incluirTemplate("header");
 
         <a href="../../BienesRaices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
 
+        <h2>Propiedades</h2>
         <table class="propiedades">
               <thead>
                     <tr>
@@ -83,7 +84,43 @@ incluirTemplate("header");
                     <?php endforeach; ?>
               </tbody>
 
+              
 
+        </table>
+        
+        <h2>Vendedores</h2>
+
+        <table class="propiedades">
+              <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Telefono</th>
+                        <th>Acciones</th>
+                    </tr>
+              </thead>
+            
+              <tbody> <!-- Mostrar los resultados --->
+              <?php foreach($vendedores as $vendedor):  ?>
+                    <tr>
+                        <td><?php echo $vendedor->id; ?></td>
+                        <td><?php echo $vendedor->nombre. " " . $vendedor->apellido; ?></td>
+                        <td><?php echo $vendedor->telefono; ?></td>
+                        <td>
+                           <form method="POST" class="w-100">
+
+                                <input type="hidden" name="id" value="<?php echo $vendedor->id;?>">
+
+
+                                <input type="submit"  class="boton-rojo-block" value="Eliminar">
+                           </form>
+                            <a href="../../BienesRaices/admin/vendedores/actualizar.php?id=<?php echo $vendedor->id; ?>" class="boton-amarillo-block">Actualizar</a>    
+                        </td>
+                    </tr>
+                    <?php endforeach; ?>
+              </tbody>
+
+              
 
         </table>
 
@@ -91,10 +128,6 @@ incluirTemplate("header");
     </main>
 
 <?php
-
-//Cerrar la conexion
-
-    mysqli_close($db);
 
     incluirTemplate("footer");
     ?>
