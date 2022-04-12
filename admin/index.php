@@ -49,11 +49,11 @@ incluirTemplate("header");
     <main class="contenedor seccion">
         <h1>Administrador de bienes raices</h1>
         <?php if (intval( $resultado)===1):?>
-        <p class="alerta exito">Anuncio Creado Correctamente</p>
+        <p class="alerta exito"> Creado Correctamente</p>
         <?php elseif (intval( $resultado)===2):?>
-        <p class="alerta exito">Anuncio Actualizado Correctamente</p>
+        <p class="alerta exito"> Actualizado Correctamente</p>
         <?php elseif (intval( $resultado)===3):?>
-        <p class="alerta exito">Anuncio Elimado Correctamente</p>
+        <p class="alerta exito"> Elimado Correctamente</p>
         <?php endif; ?>
 
 
