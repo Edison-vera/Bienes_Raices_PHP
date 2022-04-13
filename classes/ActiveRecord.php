@@ -58,30 +58,28 @@ class ActiveRecord{
          }
      }
  
-     public function actualizar(){
-        //Sanitizar los datos 
+     public function actualizar() {
+
+        // Sanitizar los datos
         $atributos = $this->sanitizarAtributos();
- 
-        $valores =[];
-        foreach($atributos as $key =>$value){
-            $valores[]= "{$key}='{$value}'";
+
+        $valores = [];
+        foreach($atributos as $key => $value) {
+            $valores[] = "{$key}='{$value}'";
         }
-        $query="UPDATE ". static::$tabla. " SET ";
-        $query.= join(', ', $valores);
-        $query.= "WHERE id= '" . self::$db->escape_string($this->id) . "' ";
-        $query.= "LIMIT 1";
-       
-        $resultado =self::$db->query($query);
- 
-     
-        if ($resultado){
-         
-         //Redireccionar al usuario
-        header("location: ../?resultado=2"); 
-     
-     }
-        
-     }
+
+        $query = "UPDATE " . static::$tabla ." SET ";
+        $query .=  join(', ', $valores );
+        $query .= " WHERE id = '" . self::$db->escape_string($this->id) . "' ";
+        $query .= " LIMIT 1 "; 
+
+        $resultado = self::$db->query($query);
+
+        if($resultado) {
+            // Redireccionar al usuario.
+            header('Location: ../?resultado=2');
+        }
+    }
  
      //Eliminar un registro 
      public function eliminar(){

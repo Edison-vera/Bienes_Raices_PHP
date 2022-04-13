@@ -34,8 +34,6 @@ class Vendedor extends ActiveRecord{
             self::$errores[]= "Debes añadir un telefono valido";
         }
 
-    
-
         return self::$errores;
     }
     
