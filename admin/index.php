@@ -3,6 +3,7 @@
 require "../includes/app.php";
 estaAutenticado();
 
+//Importar las clases 
 use App\Propiedad;
 use App\Vendedor;
 
@@ -18,6 +19,7 @@ $resultado =$_GET["resultado"] ?? null;
 //Eliminar de la base de datos un registro
 if($_SERVER["REQUEST_METHOD"] === "POST"){
     
+    //Validar ID
     $id = $_POST["id"];
     $id = filter_var($id, FILTER_VALIDATE_INT);
 
@@ -35,10 +37,8 @@ if($_SERVER["REQUEST_METHOD"] === "POST"){
                 $propiedad = Propiedad::find($id);
                 $propiedad->eliminar();
             }
-        }
-                 
+        }            
     }
-
 }
 
 //Incluye un template
@@ -48,15 +48,13 @@ incluirTemplate("header");
 ?>
     <main class="contenedor seccion">
         <h1>Administrador de bienes raices</h1>
-        <?php if (intval( $resultado)===1):?>
-        <p class="alerta exito"> Creado Correctamente</p>
-        <?php elseif (intval( $resultado)===2):?>
-        <p class="alerta exito"> Actualizado Correctamente</p>
-        <?php elseif (intval( $resultado)===3):?>
-        <p class="alerta exito"> Elimado Correctamente</p>
-        <?php endif; ?>
-
-
+    
+        <?php 
+        $mensaje = mostrarNotificacion(intval($resultado));
+        if($mensaje){ ?>
+            <p class="alerta exito"> <?php echo s($mensaje) ?> </p>
+        <?php } ?>
+        
         <a href="../../BienesRaices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
         <a href="../../BienesRaices/admin/vendedores/crear.php" class="boton boton-amarillo">Nuevo Vendedor</a>
 
